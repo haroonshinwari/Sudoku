@@ -1,4 +1,4 @@
-#HAROON SHINWARI
+#HAROON SHINWAR
 
 def read_sudoku(file):
     stream = open(file)
@@ -14,3 +14,14 @@ def convertToSets(problem):
             else:
                 row[index] = {element}
     return problem
+
+def convertToInts(problem):
+    for row in problem:
+        for index, element in enumerate(row):
+            if len(element) == 1:
+                row[index] = (list(element)[0])
+            else:
+                row[index] = 0
+    return problem
+
+
