@@ -58,3 +58,18 @@ def getBoxLocations(location):
             lst = [(6, 6), (6, 7), (6, 8), (7, 6), (7, 7), (7, 8), (8, 6), (8, 7), (8, 8)]
     return lst
 
+def eliminate(problem, location, listOfLocations):
+    eliminate_count = 0
+    convertToSets(problem)
+    if len(problem[location[0]][location[1]]) == 1:
+        x = problem[location[0]][location[1]]
+        x = list(x)
+        x = x[0]
+        listOfLocations.remove(location)
+        print(x)
+        for element in listOfLocations:
+            if x in problem[element[0]][element[1]]:
+                problem[element[0]][element[1]].remove(x)
+                eliminate_count += 1
+                print(problem[element[0]][element[1]])
+    return eliminate_count
