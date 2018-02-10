@@ -73,3 +73,4 @@ def eliminate(problem, location, listOfLocations):
                 eliminate_count += 1
                 print(problem[element[0]][element[1]])
     return eliminate_count
+
