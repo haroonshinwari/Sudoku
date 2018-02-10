@@ -120,16 +120,16 @@ class TestSudoku2011(unittest.TestCase):
                    [0, 0, 0,  2, 8, 0,  0, 0, 0],
                    [0, 0, 0,  6, 0, 0,  0, 0, 3]]
                    
-        self.tryToSolve(sudoku1, solved1)
-        self.tryToSolve(sudoku2, solved2)
-        self.tryToSolve(sudoku3, solved3)
+        tryToSolve(sudoku1, solved1)
+        ToSolve(sudoku2, solved2)
+        (sudoku3, solved3)
 
-    def tryToSolve(self, problem, solution):
+    def tryToSolve(problem, solution):
 ##        print_sudoku(problem)
         problemAsSets = convertToSets(problem)
         solve(problemAsSets)
         solved = convertToInts(problemAsSets)
 ##        print_sudoku(solution)
-        self.assertEqual(solution, solved)
+        assert solution == solved
 
 unittest.main()
