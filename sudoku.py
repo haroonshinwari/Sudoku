@@ -74,3 +74,10 @@ def eliminate(problem, location, listOfLocations):
                 print(problem[element[0]][element[1]])
     return eliminate_count
 
+def isSolved(problem):
+    solved = False
+    for i in problem:
+        for e in i:
+            if len(e) == 1:
+                solved = True
+    return solved
