@@ -36,7 +36,7 @@ def getBoxLocations(location):
     if location[0] == 0 or location[0] == 1 or location[0] == 2:
         if location[1] == 0 or location[1] == 1 or location[1] == 2:
             lst = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
-        elif location[1] == 3 or location[0] == 4 or location == 5:
+        elif location[1] == 3 or location[1] == 4 or location[1] == 5:
             lst = [(0, 3), (0, 4), (0, 5), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5)]
         else:
             lst = [(0, 6), (0, 7), (0, 8), (1, 6), (1, 7), (1, 8), (2, 6), (2, 7), (2, 8)]
@@ -60,18 +60,18 @@ def getBoxLocations(location):
 
 def eliminate(problem, location, listOfLocations):
     eliminate_count = 0
-    convertToSets(problem)
+
+    #Assigns set value to x
     if len(problem[location[0]][location[1]]) == 1:
         x = problem[location[0]][location[1]]
         x = list(x)
         x = x[0]
-        listOfLocations.remove(location)
-        print(x)
+
+        #removes x value from list of locations in problem
         for element in listOfLocations:
-            if x in problem[element[0]][element[1]]:
+            if  x in problem[element[0]][element[1]]:
                 problem[element[0]][element[1]].remove(x)
                 eliminate_count += 1
-                print(problem[element[0]][element[1]])
     return eliminate_count
 
 def isSolved(problem):
@@ -81,3 +81,40 @@ def isSolved(problem):
             if len(e) == 1:
                 solved = True
     return solved
+
+def solve(problem):
+    gameover = 0
+    convertToSets(problem)
+    x = False
+    while not x:
+        for a, row in enumerate(problem):
+            for i, e in enumerate(row):
+                location = (a, i)
+                listOfLocations = []
+                listOfLocations.append(getBoxLocations((a, i)))
+                listOfLocations.append(getRowLocations(a))
+                listOfLocations.append(getColumnLocations(i))
+                cleanlist = []
+                for lst in listOfLocations:
+                    for i in lst:
+                        if i not in cleanlist:
+                            cleanlist.append(i)
+                cleanlist.remove(location)
+                listOfLocations = cleanlist
+
+                if eliminate(problem, location, listOfLocations) == 0:
+                    gameover += 1
+                else:
+                    gameover = 0
+
+                if gameover == 81:
+                    x = True
+    if isSolved(problem) == True:
+        return True
+    else:
+        return False
+
+
+
+
+
